@@ -2,15 +2,18 @@
 body {    
     background-color: #F2F4F8;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    gap: 20px;
 }
 
 .container {
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0px 0px 15px -5px rgba(0,0,0,0.2);
+    /*box-shadow: 0px 0px 15px -5px rgba(0,0,0,0.2);*/
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     display: flex;
     flex-direction: column;
     max-width: 500px;
@@ -123,3 +126,83 @@ img.courseware-image {
         transform: scale(1);
     }
 }
+
+/* Toggle Switch CSS */
+
+.model-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    max-width: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.model-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: Arial, sans-serif;
+    color: #aaa;
+    text-align: center;
+    position: relative;
+    margin: 0 10px;
+}
+
+.model-button .icon {
+    height: 30px;
+    width: 30px;
+    margin-bottom: 5px;
+}
+
+.model-button .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: inherit;
+}
+
+.model-button .glass {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: inherit;
+    backdrop-filter: blur(4px);
+}
+
+.model-button .detail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #fff;
+}
+
+input[name="model"]:checked + .model-button {
+    color: #fff;
+    background-color: #0f62fe;
+    border-color: #0f62fe;
+}
+
+input[type=radio] {
+    position: absolute;
+    left: -9999px;
+}
+
+
+

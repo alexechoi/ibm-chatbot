@@ -26,8 +26,17 @@ function sendMessage() {
         // Encode the user's message for use in a URL
         var encodedMessage = encodeURIComponent(userMessage.textContent);
 
+        var modelToggle = document.querySelector('.model-selector input[type="radio"]:checked');
+        var apiURL;
+
+        if (modelToggle.id === 'model-2') {
+            apiURL = '***REMOVED***'; // Model 2
+        } else {
+            apiURL = '***REMOVED***'; // Model 1
+        }
+
         // Send the user's message to the API
-        fetch('***REMOVED***' + encodedMessage)
+        fetch(apiURL + encodedMessage)
         .then(response => response.json())
         .then(data => {
             var botMessage = document.createElement('div');
@@ -86,9 +95,58 @@ window.onload = function() {
         placeholderMessage.style.textAlign = 'center';
         chatArea.appendChild(placeholderMessage);
     }
+    
+    // Hide loading animation after 1 second
+    setTimeout(function() {
+        loading.style.display = 'none';
+    }, 1000);
+
+    var model1 = document.getElementById('model-1');
+    var model2 = document.getElementById('model-2');
+
+    var initialModelIcon1 = document.getElementById('img-model-1');
+    var initialModelIcon2 = document.getElementById('img-model-2');
+
+    if (model1.checked) {
+        initialModelIcon1.style.filter = "invert(1) brightness(2)";
+        initialModelIcon2.style.filter = "";
+    } else {
+        initialModelIcon2.style.filter = "invert(1) brightness(2)";
+        initialModelIcon1.style.filter = "";
+    }
+
+    document.getElementById('model-1').addEventListener('change', function() {
+        toggleModel('model-1');
+    });
+
+    document.getElementById('model-2').addEventListener('change', function() {
+        toggleModel('model-2');
+    });
 }
 
-// Hide loading animation after 1 second
-setTimeout(function() {
-    loading.style.display = 'none';
-}, 1000);
+
+function toggleModel(model) {
+    // remove active class from both models and remove CSS filter from images
+    var model1 = document.getElementById('model-1');
+    var model1Icon = document.querySelector('label[for="model-1"] img');
+    model1.classList.remove('active');
+    model1Icon.style.filter = "";
+
+    var model2 = document.getElementById('model-2');
+    var model2Icon = document.querySelector('label[for="model-2"] img');
+    model2.classList.remove('active');
+    model2Icon.style.filter = "";
+
+    // add active class to selected model and apply CSS filter to image
+    document.getElementById(model).classList.add('active');
+    if (model === 'model-1') {
+        model1Icon.style.filter = "invert(1) brightness(2)";
+    } else if (model === 'model-2') {
+        model2Icon.style.filter = "invert(1) brightness(2)";
+    }
+
+    // Then, you can use the model variable to switch your API call to use a different model
+    console.log("Using", model);
+}
+
+

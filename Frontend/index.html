@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container"> 
         <div class="logo-container">
             <img src="img/logo.svg" alt="IBM Logo" class="logo">
             <img src="img/skillsbuild.png" alt="Skillsbuild Logo" class="courseware-image">
@@ -20,6 +20,21 @@
             <input type="text" id="message-input" class="message-input" placeholder="Type your message...">
             <button class="send-btn" id="send-btn">Send</button>
         </div>
+    </div>
+
+    <div class="model-selector">
+        <!-- GPT-3 -->
+        <input type="radio" name="model" id="model-1" checked />
+        <label for="model-1" class="model-button">
+            <img id="img-model-1" src="img/openai-logomark.svg" class="icon" alt="GPT-3 Icon">
+            GPT-3
+            </label>
+
+        <input type="radio" name="model" id="model-2" />
+        <label for="model-2" class="model-button">
+            <img id="img-model-2" src="img/model.png" class="icon" alt="GPT-4 Icon">
+            Custom
+        </label>
     </div>
 
     <div class="loading" id="loading">
