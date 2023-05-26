@@ -16,6 +16,10 @@ function sendMessage() {
         sendBtn.disabled = true;
         input.style.backgroundColor = '#ccc';
 
+        // Show loading animation
+        var loading = document.getElementById('loading');
+        loading.style.display = 'flex';
+
         // Reset the input
         input.value = '';
 
@@ -38,6 +42,9 @@ function sendMessage() {
 
             // Scroll to bottom of chat area
             chatArea.scrollTop = chatArea.scrollHeight;
+
+            // Hide loading animation
+            loading.style.display = 'none';
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -52,6 +59,9 @@ function sendMessage() {
             input.disabled = false;
             sendBtn.disabled = false;
             input.style.backgroundColor = '';
+
+            // Hide loading animation
+            loading.style.display = 'none';
         });
     }
 }
@@ -77,3 +87,8 @@ window.onload = function() {
         chatArea.appendChild(placeholderMessage);
     }
 }
+
+// Hide loading animation after 1 second
+setTimeout(function() {
+    loading.style.display = 'none';
+}, 1000);
