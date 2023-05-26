@@ -3,3 +3,4 @@ flask_restful
 openai
 pandas
 openpyxl
+flask-cors

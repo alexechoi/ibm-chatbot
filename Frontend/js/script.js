@@ -19,8 +19,30 @@ function sendMessage() {
         // Reset the input
         input.value = '';
 
-        // Simulate error message
-        setTimeout(function() {
+        // Encode the user's message for use in a URL
+        var encodedMessage = encodeURIComponent(userMessage.textContent);
+
+        // Send the user's message to the API
+        fetch('***REMOVED***' + encodedMessage)
+        .then(response => response.json())
+        .then(data => {
+            var botMessage = document.createElement('div');
+            botMessage.className = 'message message-bot';
+            botMessage.textContent = data.answer;
+            chatArea.appendChild(botMessage);
+
+            // Enable the input and button
+            input.disabled = false;
+            sendBtn.disabled = false;
+            input.style.backgroundColor = '';
+
+            // Scroll to bottom of chat area
+            chatArea.scrollTop = chatArea.scrollHeight;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+
+            // Handle error - show an error message
             var botMessage = document.createElement('div');
             botMessage.className = 'message message-bot';
             botMessage.textContent = 'Sorry an error occurred';
@@ -30,11 +52,7 @@ function sendMessage() {
             input.disabled = false;
             sendBtn.disabled = false;
             input.style.backgroundColor = '';
-
-        }, 1000);
-
-        // Scroll to bottom of chat area
-        chatArea.scrollTop = chatArea.scrollHeight;
+        });
     }
 }
 
