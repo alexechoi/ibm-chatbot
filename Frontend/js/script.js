@@ -23,55 +23,72 @@ function sendMessage() {
         // Reset the input
         input.value = '';
 
-        // Encode the user's message for use in a URL
-        var encodedMessage = encodeURIComponent(userMessage.textContent);
-
         var modelToggle = document.querySelector('.model-selector input[type="radio"]:checked');
-        var apiURL;
+        var apiURL, messageBody, requestOptions;
 
-        if (modelToggle.id === 'model-2') {
-            apiURL = '***REMOVED***'; // Model 2
+        if (modelToggle.id === 'model-3') {
+            apiURL = '***REMOVED***' + userMessage.textContent; // Model 3
+            requestOptions = {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            };
+        } else if (modelToggle.id === 'model-2') {
+            apiURL = 'https://rasa-server-te6nwaa6qa-uc.a.run.app/webhooks/rest/webhook'; // Model 2
+            messageBody = JSON.stringify({ sender: 'test', message: userMessage.textContent });
+            requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: messageBody,
+            };
         } else {
-            apiURL = '***REMOVED***'; // Model 1
+            apiURL = '***REMOVED***' + userMessage.textContent; // Model 1
+            requestOptions = {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            };
         }
 
         // Send the user's message to the API
-        fetch(apiURL + encodedMessage)
-        .then(response => response.json())
-        .then(data => {
-            var botMessage = document.createElement('div');
-            botMessage.className = 'message message-bot';
-            botMessage.textContent = data.answer;
-            chatArea.appendChild(botMessage);
+        fetch(apiURL, requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                var botMessage = document.createElement('div');
+                botMessage.className = 'message message-bot';
+                if (modelToggle.id === 'model-2') {
+                    botMessage.textContent = data[0].text; // Changed from data.answer to data[0].text
+                } else {
+                    botMessage.textContent = data.answer;
+                }
+                chatArea.appendChild(botMessage);
 
-            // Enable the input and button
-            input.disabled = false;
-            sendBtn.disabled = false;
-            input.style.backgroundColor = '';
+                // Enable the input and button
+                input.disabled = false;
+                sendBtn.disabled = false;
+                input.style.backgroundColor = '';
 
-            // Scroll to bottom of chat area
-            chatArea.scrollTop = chatArea.scrollHeight;
+                // Scroll to bottom of chat area
+                chatArea.scrollTop = chatArea.scrollHeight;
 
-            // Hide loading animation
-            loading.style.display = 'none';
-        })
-        .catch((error) => {
-            console.error('Error:', error);
+                // Hide loading animation
+                loading.style.display = 'none';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
 
-            // Handle error - show an error message
-            var botMessage = document.createElement('div');
-            botMessage.className = 'message message-bot';
-            botMessage.textContent = 'Sorry an error occurred';
-            chatArea.appendChild(botMessage);
+                // Handle error - show an error message
+                var botMessage = document.createElement('div');
+                botMessage.className = 'message message-bot';
+                botMessage.textContent = 'Sorry an error occurred';
+                chatArea.appendChild(botMessage);
 
-            // Enable the input and button
-            input.disabled = false;
-            sendBtn.disabled = false;
-            input.style.backgroundColor = '';
+                // Enable the input and button
+                input.disabled = false;
+                sendBtn.disabled = false;
+                input.style.backgroundColor = '';
 
-            // Hide loading animation
-            loading.style.display = 'none';
-        });
+                // Hide loading animation
+                loading.style.display = 'none';
+            });
     }
 }
 
@@ -103,16 +120,24 @@ window.onload = function() {
 
     var model1 = document.getElementById('model-1');
     var model2 = document.getElementById('model-2');
+    var model3 = document.getElementById('model-3');
 
     var initialModelIcon1 = document.getElementById('img-model-1');
     var initialModelIcon2 = document.getElementById('img-model-2');
+    var initialModelIcon3 = document.getElementById('img-model-3');
 
     if (model1.checked) {
         initialModelIcon1.style.filter = "invert(1) brightness(2)";
         initialModelIcon2.style.filter = "";
-    } else {
+        initialModelIcon3.style.filter = "";
+    } else if (model2.checked) {
         initialModelIcon2.style.filter = "invert(1) brightness(2)";
         initialModelIcon1.style.filter = "";
+        initialModelIcon3.style.filter = "";
+    } else {
+        initialModelIcon3.style.filter = "invert(1) brightness(2)";
+        initialModelIcon1.style.filter = "";
+        initialModelIcon2.style.filter = "";
     }
 
     document.getElementById('model-1').addEventListener('change', function() {
@@ -121,6 +146,10 @@ window.onload = function() {
 
     document.getElementById('model-2').addEventListener('change', function() {
         toggleModel('model-2');
+    });
+
+    document.getElementById('model-3').addEventListener('change', function() {
+        toggleModel('model-3');
     });
 }
 
@@ -137,12 +166,19 @@ function toggleModel(model) {
     model2.classList.remove('active');
     model2Icon.style.filter = "";
 
+    var model3 = document.getElementById('model-3');
+    var model3Icon = document.querySelector('label[for="model-3"] img');
+    model3.classList.remove('active');
+    model3Icon.style.filter = "";
+
     // add active class to selected model and apply CSS filter to image
     document.getElementById(model).classList.add('active');
     if (model === 'model-1') {
         model1Icon.style.filter = "invert(1) brightness(2)";
     } else if (model === 'model-2') {
         model2Icon.style.filter = "invert(1) brightness(2)";
+    } else if (model === 'model-3') {
+        model3Icon.style.filter = "invert(1) brightness(2)";
     }
 
     // Then, you can use the model variable to switch your API call to use a different model
