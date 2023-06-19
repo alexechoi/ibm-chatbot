@@ -1,0 +1,125 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+    
+- intent: explain_course
+  examples: |
+    - What is the course [Data Science](course_name) about?
+    - Can you tell me more about the [Artificial Intelligence](course_name) course?
+    - I'd like to know more about the [Machine Learning](course_name) course.
+    - Please explain the [Deep Learning](course_name) course.
+    - Tell me about the [Python Programming](course_name) course.
+    - Describe the [Statistics](course_name) course to me.
+    - Could you provide details on the [Cloud](course_name) course?
+    - What can I learn from the [Threat Intelligence](course_name) course?
+    - I'm interested in the [AI](course_name) course, what does it cover?
+    - What topics are covered in the [Machine Learning](course_name) course?
+    - What's the content of the [Data Science](course_name) course?
+
+- intent: inquiry_about_topic
+  examples: |
+    - What is [data science](topic)?
+    - How does [AI](topic) work?
+    - Can you tell me about [machine learning](topic)?
+    - What is [deep learning](topic)?
+    - I'm interested in [Python programming](topic), can you tell me more about it?
+    - What is [statistics](topic) and how is it relevant to data science?
+    - Could you explain what [cloud computing](topic) is?
+    - What does [threat intelligence](topic) mean in cybersecurity?
+    - How is [AI](topic) used in the real world?
+    - What are some applications of [machine learning](topic)?
+    - What is the relevance of [data science](topic) in today's world?
+    - Can you explain the role of [cloud](topic) in modern technology?
+    - What is the importance of [threat intelligence](topic) in security?
+    - How can [AI](topic) be used in business?
+    - Can you explain the role of [machine learning](topic) in data analysis?
+    - I'd like to understand the importance of [data science](topic) in decision making.
+

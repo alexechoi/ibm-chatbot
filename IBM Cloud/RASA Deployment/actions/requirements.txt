@@ -1,0 +1,7 @@
+pandas
+rasa-sdk
+sklearn
+fuzzywuzzy
+sentence-transformers
+huggingface_hub
+torch

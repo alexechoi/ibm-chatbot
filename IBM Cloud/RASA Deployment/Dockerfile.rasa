@@ -1,0 +1,24 @@
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim-buster
+
+# Sets environment variables
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+ENV PATH /venv/bin:$PATH
+ENV PYTHONPATH /app
+
+# A layer of the image is only rebuilt if its Dockerfile instructions change
+# Therefore always place instructions unlikely to change at the top
+COPY ./requirements.txt /app/requirements.txt
+
+# Install any needed packages specified in requirements.txt
+RUN pip install -r /app/requirements.txt
+
+# Set the working directory in the container to /app
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Run the Rasa server
+CMD ["sh", "-c", "rasa run --debug --enable-api --cors '*' -p ${PORT:-8080}"]

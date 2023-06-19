@@ -1,0 +1,62 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - explain_course
+  - inquiry_about_topic
+
+entities:
+  - course_name
+  - topic
+
+slots:
+  course_name:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: course_name
+  topic:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: topic
+
+responses:
+  utter_greet:
+    - text: "Hey! How are you?"
+  
+  utter_cheer_up:
+    - text: "Here is something to cheer you up:"
+      image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+    - text: "Did that help you?"
+
+  utter_happy:
+    - text: "Great, carry on!"
+
+  utter_goodbye:
+    - text: "Bye"
+
+  utter_iamabot:
+    - text: "I am a bot, to help you learn more about SkillsBuild!"
+
+  utter_default: 
+    - text: "I'm sorry, I didn't understand that. Could you rephrase?"
+  
+  utter_ask_rephrase: 
+    - text: "I'm not sure I understood. Can you rephrase your message?"
+
+actions:
+  - action_explain_course
+  - action_inquiry_about_topic
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
