@@ -1,0 +1,9 @@
+torch 
+flask 
+flask_cors 
+transformers 
+numpy 
+pandas 
+sentence_transformers 
+scikit-learn
+openpyxl

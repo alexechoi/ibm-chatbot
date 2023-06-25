@@ -1,0 +1,20 @@
+{"intents": [
+{"tag": "greeting",
+ "responses": ["Hello", "How are you doing?",   "Hi!", "How do you do?"]},
+{"tag": "name",
+ "responses": ["I am an IBM SkillsBuild chatbot!"]},
+{"tag": "course_enquiry_ai",
+ "responses": ["AI is Artificial Intelligence"]},
+ {"tag": "course_enquiry_datascience",
+ "responses": ["AI is Artificial Intelligence"]},
+ {"tag": "course_enquiry_cyber",
+ "responses": ["AI is Artificial Intelligence"]},
+ {"tag": "course_enquiry_cloud",
+ "responses": ["AI is Artificial Intelligence"]},
+ {"tag": "course_enquiry_designthinking",
+ "responses": ["AI is Artificial Intelligence"]},
+{"tag": "goodbye",
+ "responses": ["Thank you, goodbye!", "See you later", "Speak soon!"]},
+{"tag": "IBM",
+"responses": ["IBM is a multinational technology company providing technical solution to various business problems. SkillsBuild is a free learning platform for students!"]}
+]}
