@@ -18,7 +18,7 @@ function sendMessage() {
 
         // Show loading animation
         var loading = document.getElementById('loading');
-        loading.style.display = 'flex';
+        loading.style.visibility = 'visible';
 
         // Reset the input
         input.value = '';
@@ -27,13 +27,15 @@ function sendMessage() {
         var apiURL, messageBody, requestOptions;
 
         if (modelToggle.id === 'model-3') {
-            apiURL = '***REMOVED***' + userMessage.textContent; // Model 3
+            apiURL = '***REMOVED***'; // Model 3
+            messageBody = JSON.stringify({ message: userMessage.textContent });
             requestOptions = {
-                method: 'GET',
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                body: messageBody,
             };
         } else if (modelToggle.id === 'model-2') {
-            apiURL = 'https://rasa-server-te6nwaa6qa-uc.a.run.app/webhooks/rest/webhook'; // Model 2
+            apiURL = '***REMOVED***'; // Model 2
             messageBody = JSON.stringify({ sender: 'test', message: userMessage.textContent });
             requestOptions = {
                 method: 'POST',
@@ -54,8 +56,10 @@ function sendMessage() {
             .then(data => {
                 var botMessage = document.createElement('div');
                 botMessage.className = 'message message-bot';
-                if (modelToggle.id === 'model-2') {
-                    botMessage.textContent = data[0].text; // Changed from data.answer to data[0].text
+                if (modelToggle.id === 'model-3') {
+                    botMessage.textContent = data.response.split('Response: ')[1]; 
+                } else if (modelToggle.id === 'model-2') {
+                    botMessage.textContent = data[0].text; 
                 } else {
                     botMessage.textContent = data.answer;
                 }
@@ -70,7 +74,7 @@ function sendMessage() {
                 chatArea.scrollTop = chatArea.scrollHeight;
 
                 // Hide loading animation
-                loading.style.display = 'none';
+                loading.style.visibility = 'hidden';
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -87,7 +91,7 @@ function sendMessage() {
                 input.style.backgroundColor = '';
 
                 // Hide loading animation
-                loading.style.display = 'none';
+                loading.style.visibility = 'hidden';
             });
     }
 }
@@ -153,7 +157,6 @@ window.onload = function() {
     });
 }
 
-
 function toggleModel(model) {
     // remove active class from both models and remove CSS filter from images
     var model1 = document.getElementById('model-1');
@@ -184,5 +187,3 @@ function toggleModel(model) {
     // Then, you can use the model variable to switch your API call to use a different model
     console.log("Using", model);
 }
-
-

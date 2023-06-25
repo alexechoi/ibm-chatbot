@@ -64,6 +64,7 @@ img.courseware-image {
 }
 
 .input-container {
+    position: relative;
     align-items: center;
     display: flex;
     justify-content: space-between;
@@ -92,11 +93,12 @@ img.courseware-image {
 
 /* Loading animations */
 .loading {
-    display: none;
     position: absolute;
+    right: 100px;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
+    z-index: 1;
+    visibility: hidden;
 }
 
 .dot {
@@ -109,6 +111,7 @@ img.courseware-image {
     animation: dot 1.4s infinite;
     animation-fill-mode: both;
 }
+
 
 .dot:nth-child(2) {
     animation-delay: .2s;
