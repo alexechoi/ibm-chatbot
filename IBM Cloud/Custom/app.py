@@ -15,7 +15,7 @@ from sentence_transformers import util
 from sklearn.preprocessing import LabelEncoder
 import json
 
-# Define the BERT_Arch class here
+# Define the BERT_Arch class
 class BERT_Arch(nn.Module):
     def __init__(self, bert):
         super(BERT_Arch, self).__init__()
@@ -24,7 +24,7 @@ class BERT_Arch(nn.Module):
         self.relu = nn.ReLU()
         self.fc1 = nn.Linear(768, 512)
         self.fc2 = nn.Linear(512, 256)
-        # Assuming num_classes = 5, please change if it's different
+        # There are 9 different possible intents hence the 9 below
         self.fc3 = nn.Linear(256, 9) 
         self.softmax = nn.LogSoftmax(dim=1)
 
