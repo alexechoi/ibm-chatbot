@@ -57,11 +57,11 @@ function sendMessage() {
                 var botMessage = document.createElement('div');
                 botMessage.className = 'message message-bot';
                 if (modelToggle.id === 'model-3') {
-                    botMessage.textContent = data.response.split('Response: ')[1]; 
+                    botMessage.textContent = stripDotAndSpace(data.response.split('Response: ')[1]);
                 } else if (modelToggle.id === 'model-2') {
-                    botMessage.textContent = data[0].text; 
+                    botMessage.textContent = stripDotAndSpace(data[0].text);
                 } else {
-                    botMessage.textContent = data.answer;
+                    botMessage.textContent = stripDotAndSpace(data.answer)
                 }
                 chatArea.appendChild(botMessage);
 
@@ -155,6 +155,14 @@ window.onload = function() {
     document.getElementById('model-3').addEventListener('change', function() {
         toggleModel('model-3');
     });
+}
+
+function stripDotAndSpace(str) {
+    str = str.trim();
+    if (str.startsWith(".")) {
+        return str.substring(2);
+    }
+    return str;
 }
 
 function toggleModel(model) {
